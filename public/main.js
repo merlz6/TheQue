@@ -17,9 +17,12 @@ var connected = false;
 var typing = false;
 var lastTypingTime;
 var $currentInput = $usernameInput.focus();
+var $queArea = $('.queArea')
 
 var socket = io();
 
+$chatPage.hide()
+$queArea.hide()
 const addParticipantsMessage = (data) => {
     var message = '';
     if (data.numUsers === 1) {
@@ -44,8 +47,9 @@ const addParticipantsMessage = (data) => {
       // Tell the server your username
       socket.emit('add user', username);
     }
-
-
+    $loginPage.hide()
+    $chatPage.show()
+    $queArea.show()
   }
 
 
