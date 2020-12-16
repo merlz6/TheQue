@@ -86,10 +86,10 @@ const addParticipantsMessage = (data) => {
     var $messageBodyDiv = $('<span class="messageBody">')
       .text(data.message);
 
-    var typingClass = data.typing ? 'typing' : '';
+
     var $messageDiv = $('<li class="message"/>')
       .data('username', data.username)
-      .addClass(typingClass)
+
       .append($usernameDiv, $messageBodyDiv);
       var $deleteButton = $('<button>')
         .text('Delete')
@@ -179,11 +179,11 @@ const addParticipantsMessage = (data) => {
   });
 
   // Whenever the server emits 'user left', log it in the chat body
-  // socket.on('user left', (data) => {
-  //   log(data.username + ' left');
-  //   addParticipantsMessage(data);
-  //   removeChatTyping(data);
-  // });
+  socket.on('user left', (data) => {
+    log(data.username + ' left');
+    addParticipantsMessage(data);
+    // removeChatTyping(data);
+  });
 
   // Whenever the server emits 'typing', show the typing message
   // socket.on('typing', (data) => {
